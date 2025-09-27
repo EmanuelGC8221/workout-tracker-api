@@ -3,7 +3,7 @@ const router = express.Router();
 
 // Importar versiones de rutas
 const v1Routes = require('./v1');
-const { version } = require('react');
+
 
 router.get('/', (req, res) => {
     res.json ({
@@ -14,6 +14,9 @@ router.get('/', (req, res) => {
         }
     });
 });
+
+// usar las rutas de v1 con prefijo /v1
+router.use('/v1', v1Routes);
 
 module.exports = router;
 
