@@ -4,7 +4,7 @@ const router = express.Router();
 //Importar rutas específicas.
 const usersRoutes = require('./users.routes');
 
-//configurar las rutass
+// Aquí agrupas todos los módulos de la versión v1
 router.use('/users', usersRoutes);
 
 
