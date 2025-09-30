@@ -1,0 +1,40 @@
+// Estado en memoria (simulación de base de datos)
+let ejercicios = [
+  {
+    id: "1",
+    nombre: "Press de banca",
+    descripcion: "Ejercicio de fuerza para trabajar el pecho y tríceps.",
+    categoria: "Fuerza",
+    grupoMuscular: "Pecho"
+  }
+];
+
+// GET /ejercicios
+const getEjercicios = (req, res) => {
+  const { categoria, search } = req.query;
+  let result = ejercicios;
+
+  if (categoria) {
+    result = result.filter(e => e.categoria.toLowerCase() === categoria.toLowerCase());
+  }
+
+  if (search) {
+    result = result.filter(e =>
+      e.nombre.toLowerCase().includes(search.toLowerCase())
+    );
+  }
+
+  res.status(200).json(result);
+};
+
+// GET /ejercicios/:id
+const getEjercicioById = (req, res) => {
+  const { id } = req.params;
+  const ejercicio = ejercicios.find(e => e.id === id);
+
+  if (!ejercicio) {
+    return res.status(404).json({ error: 'Ejercicio no encontrado' });
+  }
+
+  res.status(200).json(ejercicio);
+};
