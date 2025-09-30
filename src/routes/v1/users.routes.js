@@ -35,4 +35,31 @@ router.get('/:id', (req, res) => {
   res.status(200).json(user);   // 4
 });
 
+
+// POST /users
+router.post('/', (req, res) => {
+  const { nombre, email, edad, alturaCm, pesoKg, rol} = req.body;   // 1
+
+  if (!nombre || !email) {   // 2
+    return res.status(400).json({ error: 'Name y email son requeridos' });
+  }
+
+  const nuevoUsuario = {   // 3
+    id: `${Date.now()}`,  // identificador temporal
+    nombre,
+    email,
+    fechaUltimaActualización: new Date().toISOString(),
+    edad,
+    alturaCm,
+    pesoKg,
+    rol: rol || 'user',  // valor por defecto si no envían rol
+    creadoEn: new Date().toISOString()
+  };
+
+  users.push(nuevoUsuario);   // 4
+
+  res.status(201).json(nuevoUsuario);   // 5
+});
+
+
 module.exports = router;
