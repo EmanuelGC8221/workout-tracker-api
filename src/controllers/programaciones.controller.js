@@ -79,3 +79,26 @@ const updateProgramacion = (req, res) => {
   res.status(200).json(programaciones[index]);
 };
 
+// DELETE /programaciones/:id
+const deleteProgramacion = (req, res) => {
+  const { id } = req.params;
+  const index = programaciones.findIndex(p => p.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ error: "Programación no encontrada" });
+  }
+
+  const deleted = programaciones.splice(index, 1);
+  res.status(200).json({ deleted: deleted[0].id });
+};
+
+module.exports = {
+  getProgramaciones,
+  getProgramacionById,
+  createProgramacion,
+  updateProgramacion,
+  deleteProgramacion
+};
+
+
+
