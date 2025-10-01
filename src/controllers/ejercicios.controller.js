@@ -40,3 +40,24 @@ const getEjercicioById = (req, res) => {
 };
 
 
+// POST /ejercicios
+const createEjercicio = (req, res) => {
+  const { nombre, descripcion, categoria, grupoMuscular } = req.body;
+
+  if (!nombre || !descripcion) {
+    return res.status(400).json({ error: 'Nombre y descripción son requeridos' });
+  }
+
+  const nuevoEjercicio = {
+    id: `${Date.now()}`,
+    nombre,
+    descripcion,
+    categoria,
+    grupoMuscular
+  };
+
+  ejercicios.push(nuevoEjercicio);
+
+  res.status(201).json(nuevoEjercicio);
+};
+
