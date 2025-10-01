@@ -25,3 +25,30 @@ const getInformesByUsuario = (req, res) => {
 
   res.status(200).json(result);
 };
+
+// POST /usuarios/:usuarioId/informes
+const createInformeForUsuario = (req, res) => {
+  const { usuarioId } = req.params;
+  const { titulo, resumen, detalles } = req.body;
+
+  if (!titulo || !resumen || !detalles) {
+    return res.status(400).json({ error: "titulo, resumen y detalles son requeridos" });
+  }
+
+  const nuevoInforme = {
+    id: `${Date.now()}`,
+    usuarioId,
+    titulo,
+    fechaGeneracion: new Date().toISOString().split("T")[0], // YYYY-MM-DD
+    resumen,
+    detalles
+  };
+
+  informes.push(nuevoInforme);
+
+  res.status(201).json(nuevoInforme);
+};
+
+
+
+
