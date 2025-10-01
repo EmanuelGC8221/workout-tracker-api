@@ -49,6 +49,23 @@ const createInformeForUsuario = (req, res) => {
   res.status(201).json(nuevoInforme);
 };
 
+// DELETE /informes/:id
+const deleteInforme = (req, res) => {
+  const { id } = req.params;
+  const index = informes.findIndex(i => i.id === id);
 
+  if (index === -1) {
+    return res.status(404).json({ error: "Informe no encontrado" });
+  }
+
+  const deletedInforme = informes.splice(index, 1);
+  res.status(200).json({ deleted: deletedInforme[0].id });
+};
+
+module.exports = {
+  getInformesByUsuario,
+  createInformeForUsuario,
+  deleteInforme
+};
 
 
