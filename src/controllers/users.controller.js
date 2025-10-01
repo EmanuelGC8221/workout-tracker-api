@@ -17,16 +17,16 @@ let users = [
 
 // GET /users
 const getUsers = (req, res) => {
-  const { rol, search } = req.query;
+  const { rol, nombre } = req.query;
   let result = users;
 
   if (rol) {
     result = result.filter(u => u.rol === rol);
   }
 
-  if (search) {
+  if (nombre) {
     result = result.filter(u =>
-      u.nombre.toLowerCase().includes(search.toLowerCase())
+      u.nombre.toLowerCase().includes(nombre.toLowerCase())
     );
   }
 

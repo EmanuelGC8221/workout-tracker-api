@@ -11,16 +11,16 @@ let ejercicios = [
 
 // GET /ejercicios
 const getEjercicios = (req, res) => {
-  const { categoria, search } = req.query;
+  const { categoria, nombre } = req.query;
   let result = ejercicios;
 
   if (categoria) {
     result = result.filter(e => e.categoria.toLowerCase() === categoria.toLowerCase());
   }
 
-  if (search) {
+  if (nombre) {
     result = result.filter(e =>
-      e.nombre.toLowerCase().includes(search.toLowerCase())
+      e.nombre.toLowerCase().includes(nombre.toLowerCase())
     );
   }
 
