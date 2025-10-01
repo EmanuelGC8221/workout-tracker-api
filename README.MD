@@ -59,3 +59,9 @@ Para ejercicios:
 - POST /api/v1/comentarios 201 CREATED
 - PUT /api/v1/comentarios/:id 200 OK
 - DELETE /api/v1/comentarios/:id 200 OK
+
+# ENDPOINT PARA feat/informes
+
+- GET /usuarios/{usuarioId}/informes 200 OK
+- POST /usuarios/{usuarioId}/informes 201 CREATED
+- DELETE /informes/{id} 200 OK
