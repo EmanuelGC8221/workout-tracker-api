@@ -78,5 +78,24 @@ const updateComentario = (req, res) => {
   res.status(200).json(comentarios[index]);
 };
 
+// DELETE /comentarios/:id
+const deleteComentario = (req, res) => {
+  const { id } = req.params;
+  const index = comentarios.findIndex(c => c.id === id);
 
+  if (index === -1) {
+    return res.status(404).json({ error: "Comentario no encontrado" });
+  }
+
+  const deletedComentario = comentarios.splice(index, 1);
+  res.status(200).json({ deleted: deletedComentario[0].id });
+};
+
+module.exports = {
+  getComentarios,
+  getComentarioById,
+  createComentario,
+  updateComentario,
+  deleteComentario
+};
 
