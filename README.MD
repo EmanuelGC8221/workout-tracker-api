@@ -25,3 +25,20 @@ Para ejercicios:
 - POST /api/v1/ejercicios 201 CREATED
 - PUT /api/v1/ejercicios/:id 200 OK
 - DELETE /api/v1/ejercicios/:id 200 OK
+
+## ENDPOINTS PARA feat/entrenamientos
+
+ Definición de rutas
+- GET /api/v1/entrenamientos 200 OK
+- GET /api/v1/entrenamientos/:id 200 OK
+- POST /api/v1/entrenamientos 200 CREATED
+- PUT /api/v1/entrenamientos/:id 200 OK
+- DELETE /api/v1/entrenamientos/:id 200 OK
+
+## ENDPOINTS PARA feat/ejerciciosentrenamientos
+
+- GET /api/v1/ejercicios-entrenamientos  200 OK
+- GET /api/v1/ejercicios-entrenamientos/:id 200 OK
+- POST /api/v1/ejercicios-entrenamientos 201 CREATED
+- PUT /api/v1/ejercicios-entrenamientos/:id 200 OK
+- DELETE /api/v1/ejercicios-entrenamientos/:id 200 OK
