@@ -68,3 +68,29 @@ const createPlan = (req, res) => {
 
   res.status(201).json(nuevoPlan);
 };
+
+// PUT /ejercicios-entrenamientos/:id
+const updatePlan = (req, res) => {
+  const { id } = req.params;
+  const { nombre, descripcion, fechaInicio, fechaFin, entrenamientos } = req.body;
+
+  const index = planes.findIndex(p => p.id === id);
+  if (index === -1) {
+    return res.status(404).json({ error: 'Plan no encontrado' });
+  }
+
+  if (!nombre || !descripcion || !fechaInicio || !fechaFin) {
+    return res.status(400).json({ error: 'Nombre, descripción, fechaInicio y fechaFin son requeridos' });
+  }
+
+  planes[index] = {
+    ...planes[index],
+    nombre,
+    descripcion,
+    fechaInicio,
+    fechaFin,
+    entrenamientos: entrenamientos || planes[index].entrenamientos
+  };
+
+  res.status(200).json(planes[index]);
+};
