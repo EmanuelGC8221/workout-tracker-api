@@ -12,9 +12,16 @@ Así, permite filtrar y buscar de manera flexible con parámetros de consulta.
 ## Commit 7, finalización
 ENDPOINTS
 Para Usuarios:
--	GET /usuarios - Este llama y lista los usuarios ya existentes. 200 OK
--	GET /usuarios/{id} – obtiene un usuario por dicho identificador. 200 OK
--	POST /usuarios – Crea un nuevo usuario. 201 Created
--	PUT /usuarios/{id} – Actualiza el usuario por identificador. 200OK
--	DELETE /usuarios/{id} – elimina usuario por identificador. 200 OK
+- GET /api/v1/users 200 OK
+- GET /api/v1/users/:id 200 OK
+- POST /api/v1/users 201 CREATED
+- PUT /api/v1/users/:id 200 OK
+- DELETE /api/v1/users/:id 200 OK
 
+## ENDPOINTS PARA FEAT/EJERCICIOS
+Para ejercicios: 
+- GET /api/v1/ejercicios  200 OK
+- GET /api/v1/ejercicios/:id 200 OK
+- POST /api/v1/ejercicios 201 CREATED
+- PUT /api/v1/ejercicios/:id 200 OK
+- DELETE /api/v1/ejercicios/:id 200 OK
