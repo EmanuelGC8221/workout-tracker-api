@@ -94,3 +94,24 @@ const updatePlan = (req, res) => {
 
   res.status(200).json(planes[index]);
 };
+
+// DELETE /ejercicios-entrenamientos/:id
+const deletePlan = (req, res) => {
+  const { id } = req.params;
+  const index = planes.findIndex(p => p.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ error: 'Plan no encontrado' });
+  }
+
+  const deletedPlan = planes.splice(index, 1);
+  res.status(200).json({ deleted: deletedPlan[0].id });
+};
+
+module.exports = {
+  getPlanes,
+  getPlanById,
+  createPlan,
+  updatePlan,
+  deletePlan
+};
