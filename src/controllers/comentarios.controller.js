@@ -32,3 +32,26 @@ const getComentarioById = (req, res) => {
 
   res.status(200).json(comentario);
 };
+
+// POST /comentarios
+const createComentario = (req, res) => {
+  const { entrenamientoId, texto } = req.body;
+
+  if (!entrenamientoId || !texto) {
+    return res.status(400).json({ error: "entrenamientoId y texto son requeridos" });
+  }
+
+  const nuevoComentario = {
+    id: `${Date.now()}`,
+    entrenamientoId,
+    texto,
+    fechaCreacion: new Date().toISOString().split("T")[0], // YYYY-MM-DD
+    fechaActualizacion: new Date().toISOString().split("T")[0]
+  };
+
+  comentarios.push(nuevoComentario);
+
+  res.status(201).json(nuevoComentario);
+};
+
+
