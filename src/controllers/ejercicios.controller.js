@@ -38,3 +38,5 @@ const getEjercicioById = (req, res) => {
 
   res.status(200).json(ejercicio);
 };
+
+
