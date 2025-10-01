@@ -11,16 +11,16 @@ let entrenamientos = [
 
 // GET /entrenamientos
 const getEntrenamientos = (req, res) => {
-  const { fecha, search } = req.query;
+  const { fecha, nombre } = req.query;
   let result = entrenamientos;
 
   if (fecha) {
     result = result.filter(e => e.fecha === fecha);
   }
 
-  if (search) {
+  if (nombre) {
     result = result.filter(e =>
-      e.nombre.toLowerCase().includes(search.toLowerCase())
+      e.nombre.toLowerCase().includes(nombre.toLowerCase())
     );
   }
 
@@ -39,3 +39,23 @@ const getEntrenamientoById = (req, res) => {
   res.status(200).json(entrenamiento);
 };
 
+// POST /entrenamientos
+const createEntrenamiento = (req, res) => {
+  const { nombre, fecha, hora, comentarios } = req.body;
+
+  if (!nombre || !fecha || !hora) {
+    return res.status(400).json({ error: 'Nombre, fecha y hora son requeridos' });
+  }
+
+  const nuevoEntrenamiento = {
+    id: `${Date.now()}`,
+    nombre,
+    fecha,
+    hora,
+    comentarios
+  };
+
+  entrenamientos.push(nuevoEntrenamiento);
+
+  res.status(201).json(nuevoEntrenamiento);
+};
