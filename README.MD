@@ -11,6 +11,7 @@ Así, permite filtrar y buscar de manera flexible con parámetros de consulta.
 
 ## Commit 7, finalización
 ENDPOINTS
+## ENDPOINTS PARA feat/users
 Para Usuarios:
 - GET /api/v1/users 200 OK
 - GET /api/v1/users/:id 200 OK
@@ -18,7 +19,7 @@ Para Usuarios:
 - PUT /api/v1/users/:id 200 OK
 - DELETE /api/v1/users/:id 200 OK
 
-## ENDPOINTS PARA FEAT/EJERCICIOS
+## ENDPOINTS PARA feat/ejercicios
 Para ejercicios: 
 - GET /api/v1/ejercicios  200 OK
 - GET /api/v1/ejercicios/:id 200 OK
@@ -42,3 +43,19 @@ Para ejercicios:
 - POST /api/v1/ejercicios-entrenamientos 201 CREATED
 - PUT /api/v1/ejercicios-entrenamientos/:id 200 OK
 - DELETE /api/v1/ejercicios-entrenamientos/:id 200 OK
+
+## ENDPOINTS PARA feat/programaciones
+
+- GET /api/v1/programaciones 200 OK
+- GET /api/v1/programaciones/:id 200 OK
+- POST /api/v1/programaciones 201 CREATED
+- PUT /api/v1/programaciones/:id 200 OK
+- DELETE /api/v1/programaciones/:id 200 OK
+
+## ENDPOINTS PARA feat/comentarios
+
+- GET /api/v1/comentarios 200 OK
+- GET /api/v1/comentarios/:id 200 OK
+- POST /api/v1/comentarios 201 CREATED
+- PUT /api/v1/comentarios/:id 200 OK
+- DELETE /api/v1/comentarios/:id 200 OK
