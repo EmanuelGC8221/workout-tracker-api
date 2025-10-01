@@ -59,3 +59,28 @@ const createEntrenamiento = (req, res) => {
 
   res.status(201).json(nuevoEntrenamiento);
 };
+
+// PUT /entrenamientos/:id
+const updateEntrenamiento = (req, res) => {
+  const { id } = req.params;
+  const { nombre, fecha, hora, comentarios } = req.body;
+
+  const index = entrenamientos.findIndex(e => e.id === id);
+  if (index === -1) {
+    return res.status(404).json({ error: 'Entrenamiento no encontrado' });
+  }
+
+  if (!nombre || !fecha || !hora) {
+    return res.status(400).json({ error: 'Nombre, fecha y hora son requeridos' });
+  }
+
+  entrenamientos[index] = {
+    ...entrenamientos[index],
+    nombre,
+    fecha,
+    hora,
+    comentarios
+  };
+
+  res.status(200).json(entrenamientos[index]);
+};
