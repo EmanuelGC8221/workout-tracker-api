@@ -32,3 +32,24 @@ const getProgramacionById = (req, res) => {
 
   res.status(200).json(programacion);
 };
+
+// POST /programaciones
+const createProgramacion = (req, res) => {
+  const { entrenamientoId, fecha, hora, estado } = req.body;
+
+  if (!entrenamientoId || !fecha || !hora) {
+    return res.status(400).json({ error: "entrenamientoId, fecha y hora son requeridos" });
+  }
+
+  const nuevaProgramacion = {
+    id: `${Date.now()}`,
+    entrenamientoId,
+    fecha,
+    hora,
+    estado: estado || "Pendiente"
+  };
+
+  programaciones.push(nuevaProgramacion);
+
+  res.status(201).json(nuevaProgramacion);
+};
