@@ -54,4 +54,29 @@ const createComentario = (req, res) => {
   res.status(201).json(nuevoComentario);
 };
 
+// PUT /comentarios/:id
+const updateComentario = (req, res) => {
+  const { id } = req.params;
+  const { entrenamientoId, texto } = req.body;
+
+  const index = comentarios.findIndex(c => c.id === id);
+  if (index === -1) {
+    return res.status(404).json({ error: "Comentario no encontrado" });
+  }
+
+  if (!entrenamientoId || !texto) {
+    return res.status(400).json({ error: "entrenamientoId y texto son requeridos" });
+  }
+
+  comentarios[index] = {
+    ...comentarios[index],
+    entrenamientoId,
+    texto,
+    fechaActualizacion: new Date().toISOString().split("T")[0]
+  };
+
+  res.status(200).json(comentarios[index]);
+};
+
+
 
