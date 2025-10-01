@@ -46,3 +46,25 @@ const getPlanById = (req, res) => {
 
   res.status(200).json(plan);
 };
+
+// POST /ejercicios-entrenamientos
+const createPlan = (req, res) => {
+  const { nombre, descripcion, fechaInicio, fechaFin, entrenamientos } = req.body;
+
+  if (!nombre || !descripcion || !fechaInicio || !fechaFin) {
+    return res.status(400).json({ error: 'Nombre, descripción, fechaInicio y fechaFin son requeridos' });
+  }
+
+  const nuevoPlan = {
+    id: `${Date.now()}`,
+    nombre,
+    descripcion,
+    fechaInicio,
+    fechaFin,
+    entrenamientos: entrenamientos || []
+  };
+
+  planes.push(nuevoPlan);
+
+  res.status(201).json(nuevoPlan);
+};
