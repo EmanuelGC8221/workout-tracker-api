@@ -61,3 +61,28 @@ const createEjercicio = (req, res) => {
   res.status(201).json(nuevoEjercicio);
 };
 
+
+// PUT /ejercicios/:id
+const updateEjercicio = (req, res) => {
+  const { id } = req.params;
+  const { nombre, descripcion, categoria, grupoMuscular } = req.body;
+
+  const index = ejercicios.findIndex(e => e.id === id);
+  if (index === -1) {
+    return res.status(404).json({ error: 'Ejercicio no encontrado' });
+  }
+
+  if (!nombre || !descripcion) {
+    return res.status(400).json({ error: 'Nombre y descripción son requeridos' });
+  }
+
+  ejercicios[index] = {
+    ...ejercicios[index],
+    nombre,
+    descripcion,
+    categoria,
+    grupoMuscular
+  };
+
+  res.status(200).json(ejercicios[index]);
+};
