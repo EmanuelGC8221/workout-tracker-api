@@ -7,6 +7,8 @@ const ejerciciosRoutes = require ('./ejercicios.routes');
 const entrenamientosRoutes = require('./entrenamientos.routes');
 const ejerciciosEntrenamientosRoutes = require('./ejerciciosEntrenamientos.routes');
 const programacionesRoutes = require('./programaciones.routes')
+const comentariosRoutes = require("./comentarios.routes");
+
 
 // Aquí agrupas todos los módulos de la versión v1
 router.use('/users', usersRoutes);
@@ -14,7 +16,7 @@ router.use('/ejercicios', ejerciciosRoutes);
 router.use('/entrenamientos', entrenamientosRoutes);
 router.use('/ejercicios-entrenamientos', ejerciciosEntrenamientosRoutes);
 router.use('/programaciones', programacionesRoutes);
-
+router.use("/comentarios", comentariosRoutes);
 
 //exportar el router principal para ser usado en app.js
 module.exports = router;
