@@ -6,6 +6,7 @@ const {
   getUserById,
   createUser,
   updateUser,
+  patchUser,
   deleteUser
 } = require('../../controllers/users.controller');
 
@@ -14,6 +15,7 @@ router.get('/', getUsers);         // GET /api/v1/users
 router.get('/:id', getUserById);   // GET /api/v1/users/:id
 router.post('/', createUser);      // POST /api/v1/users
 router.put('/:id', updateUser);    // PUT /api/v1/users/:id
+router.patch('/:id', patchUser);   // PATCH /api/v1/users/:id
 router.delete('/:id', deleteUser); // DELETE /api/v1/users/:id
 
 module.exports = router;

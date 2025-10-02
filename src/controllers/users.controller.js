@@ -97,6 +97,29 @@ const updateUser = (req, res) => {
   res.status(200).json(users[index]);
 };
 
+// PATCH /users/:id
+const patchUser = (req, res) => {
+  const { id } = req.params;
+  const user = users.find(u => u.id === id);
+
+  if (!user) {
+    return res.status(404).json({ error: 'Usuario no encontrado' });
+  }
+
+  // Actualizar solo campos enviados en el body
+  const camposActualizables = ['nombre', 'email', 'rol', 'pesoKg', 'edad', 'alturaCm'];
+  camposActualizables.forEach(campo => {
+    if (req.body[campo] !== undefined) {
+      user[campo] = req.body[campo];
+    }
+  });
+
+  user.fechaUltimaActualización = new Date().toISOString();
+
+  res.status(200).json(user);
+};
+
+
 // DELETE /users/:id
 const deleteUser = (req, res) => {
   const { id } = req.params;
@@ -115,5 +138,6 @@ module.exports = {
   getUserById,
   createUser,
   updateUser,
+  patchUser,
   deleteUser
 };
