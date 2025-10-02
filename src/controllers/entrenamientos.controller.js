@@ -85,6 +85,27 @@ const updateEntrenamiento = (req, res) => {
   res.status(200).json(entrenamientos[index]);
 };
 
+// PATCH /entrenamientos/:id
+const patchEntrenamiento = (req, res) => {
+  const { id } = req.params;
+  const entrenamiento = entrenamientos.find(e => e.id === id);
+
+  if (!entrenamiento) {
+    return res.status(404).json({ error: 'Entrenamiento no encontrado' });
+  }
+
+  const camposActualizables = ['usuarioId', 'nombre', 'descripcion', 'duracionMin', 'nivel'];
+  camposActualizables.forEach(campo => {
+    if (req.body[campo] !== undefined) {
+      entrenamiento[campo] = req.body[campo];
+    }
+  });
+
+  entrenamiento.fechaUltimaActualización = new Date().toISOString();
+
+  res.status(200).json(entrenamiento);
+};
+
 // DELETE /entrenamientos/:id
 const deleteEntrenamiento = (req, res) => {
   const { id } = req.params;
@@ -103,5 +124,6 @@ module.exports = {
   getEntrenamientoById,
   createEntrenamiento,
   updateEntrenamiento,
+  patchEntrenamiento,
   deleteEntrenamiento
 };
