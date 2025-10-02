@@ -11,16 +11,16 @@ let entrenamientos = [
 
 // GET /entrenamientos
 const getEntrenamientos = (req, res) => {
-  const { fecha, search } = req.query;
+  const { fecha, nombre } = req.query;
   let result = entrenamientos;
 
   if (fecha) {
     result = result.filter(e => e.fecha === fecha);
   }
 
-  if (search) {
+  if (nombre) {
     result = result.filter(e =>
-      e.nombre.toLowerCase().includes(search.toLowerCase())
+      e.nombre.toLowerCase().includes(nombre.toLowerCase())
     );
   }
 
@@ -39,3 +39,69 @@ const getEntrenamientoById = (req, res) => {
   res.status(200).json(entrenamiento);
 };
 
+// POST /entrenamientos
+const createEntrenamiento = (req, res) => {
+  const { nombre, fecha, hora, comentarios } = req.body;
+
+  if (!nombre || !fecha || !hora) {
+    return res.status(400).json({ error: 'Nombre, fecha y hora son requeridos' });
+  }
+
+  const nuevoEntrenamiento = {
+    id: `${Date.now()}`,
+    nombre,
+    fecha,
+    hora,
+    comentarios
+  };
+
+  entrenamientos.push(nuevoEntrenamiento);
+
+  res.status(201).json(nuevoEntrenamiento);
+};
+
+// PUT /entrenamientos/:id
+const updateEntrenamiento = (req, res) => {
+  const { id } = req.params;
+  const { nombre, fecha, hora, comentarios } = req.body;
+
+  const index = entrenamientos.findIndex(e => e.id === id);
+  if (index === -1) {
+    return res.status(404).json({ error: 'Entrenamiento no encontrado' });
+  }
+
+  if (!nombre || !fecha || !hora) {
+    return res.status(400).json({ error: 'Nombre, fecha y hora son requeridos' });
+  }
+
+  entrenamientos[index] = {
+    ...entrenamientos[index],
+    nombre,
+    fecha,
+    hora,
+    comentarios
+  };
+
+  res.status(200).json(entrenamientos[index]);
+};
+
+// DELETE /entrenamientos/:id
+const deleteEntrenamiento = (req, res) => {
+  const { id } = req.params;
+  const index = entrenamientos.findIndex(e => e.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ error: 'Entrenamiento no encontrado' });
+  }
+
+  const deletedEntrenamiento = entrenamientos.splice(index, 1);
+  res.status(200).json({ deleted: deletedEntrenamiento[0].id });
+};
+
+module.exports = {
+  getEntrenamientos,
+  getEntrenamientoById,
+  createEntrenamiento,
+  updateEntrenamiento,
+  deleteEntrenamiento
+};
