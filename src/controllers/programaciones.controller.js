@@ -79,6 +79,22 @@ const updateProgramacion = (req, res) => {
   res.status(200).json(programaciones[index]);
 };
 
+// PATCH /programaciones/:id
+const patchProgramacion = (req, res) => {
+  const { id } = req.params;
+  const p = programaciones.find(x => x.id === id);
+
+  if (!p) return res.status(404).json({ error: 'Programación no encontrada' });
+
+  const camposActualizables = ['entrenamientoId', 'fecha', 'hora', 'estado'];
+  camposActualizables.forEach(c => {
+    if (req.body[c] !== undefined) p[c] = req.body[c];
+  });
+
+  p.fechaUltimaActualización = new Date().toISOString();
+  res.status(200).json(p);
+};
+
 // DELETE /programaciones/:id
 const deleteProgramacion = (req, res) => {
   const { id } = req.params;
@@ -97,6 +113,7 @@ module.exports = {
   getProgramacionById,
   createProgramacion,
   updateProgramacion,
+  patchProgramacion,
   deleteProgramacion
 };
 
