@@ -95,6 +95,26 @@ const updatePlan = (req, res) => {
   res.status(200).json(planes[index]);
 };
 
+// PATCH /ejerciciosentrenamientos/:id
+const patchEjercicioEntrenamiento = (req, res) => {
+  const { id } = req.params;
+  const plan = planes.find(p => p.id === id);
+
+  if (!plan) {
+    return res.status(404).json({ error: "Plan no encontrado" });
+  }
+
+  const camposActualizables = ["nombre", "descripcion", "fechaInicio", "fechaFin"];
+  camposActualizables.forEach(campo => {
+    if (req.body[campo] !== undefined) {
+      plan[campo] = req.body[campo];
+    }
+  });
+
+  res.status(200).json(plan);
+};
+
+
 // DELETE /ejercicios-entrenamientos/:id
 const deletePlan = (req, res) => {
   const { id } = req.params;
@@ -113,5 +133,6 @@ module.exports = {
   getPlanById,
   createPlan,
   updatePlan,
+  patchEjercicioEntrenamiento,
   deletePlan
 };
