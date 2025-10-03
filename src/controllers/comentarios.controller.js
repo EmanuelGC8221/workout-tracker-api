@@ -78,6 +78,27 @@ const updateComentario = (req, res) => {
   res.status(200).json(comentarios[index]);
 };
 
+// PATCH /comentarios/:id
+const patchComentario = (req, res) => {
+  const { id } = req.params;
+  const comentario = comentarios.find(c => c.id === id);
+
+  if (!comentario) {
+    return res.status(404).json({ error: "Comentario no encontrado" });
+  }
+
+  const campos = ["texto", "entrenamientoId"];
+  campos.forEach(campo => {
+    if (req.body[campo] !== undefined) {
+      comentario[campo] = req.body[campo];
+    }
+  });
+
+  comentario.fechaActualizacion = new Date().toISOString().split("T")[0];
+
+  res.status(200).json(comentario);
+};
+
 // DELETE /comentarios/:id
 const deleteComentario = (req, res) => {
   const { id } = req.params;
@@ -96,6 +117,7 @@ module.exports = {
   getComentarioById,
   createComentario,
   updateComentario,
+  patchComentario,
   deleteComentario
 };
 
